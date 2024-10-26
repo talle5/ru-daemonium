@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime,timedelta
 from urllib.parse import urlencode
 from fake_useragent import UserAgent
+import re
 
 
 class SigaaClient:
@@ -129,6 +130,16 @@ class SigaaClient:
             with open('sigaa.html', 'w') as file:
                 file.write(self.last_page.text)
 
+    def datas_agendadas(self) -> list[str]:
+        """
+        retorna uma lista com as datas que ja estão agendadas.\n
+        retorna datas repatidas (almoço, janta)\n
+        retorna no formato string 00/00/0000\n
+        !é necessario está na pagina de agendamento para usar essa função!
+        """
+        soup = BeautifulSoup(self.last_page.content, 'html.parser')
+        return [x.text for x in soup.findAll(name='td') if re.search(r"\d{2}/\d{2}/\d{4}",x.text)]
+
     def call(self, request, url, **kwargs):
         payload = None
         for key in kwargs:
@@ -137,8 +148,7 @@ class SigaaClient:
                     self.session.headers['Referer'] = kwargs[key]
                 case 'payload':
                     payload = kwargs[key]
-        response = request(url, data=payload)
-        self.last_page = response
+        self.last_page = request(url, data=payload)
 
 # execulte isso sempre nessa sequencia caso contrario o servidor retorna um erro
 client = SigaaClient()
