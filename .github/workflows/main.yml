@@ -31,4 +31,4 @@ jobs:
       # 4. Executa o script Python
       - name: Run Python script
         run: |
-          python ru.py ${{secrets.SIGAA_USER}} ${{secrets.SIGAA_SENHA}}
+          python ru.py --modo week --user ${{secrets.SIGAA_USER}} --password ${{secrets.SIGAA_SENHA}}
