@@ -11,10 +11,11 @@ instalar dependências:
 ``` shell
 pip install -r requirements.txt
 ```
-modifique conforme necessidade e então execute:
+execute:
 ``` shell
-python ru.py
+python ru.py --modo [week,next_day] --user [USUARIO] --password [SENHA]
 ```
+
 
 # Lista de tarefas:
 
