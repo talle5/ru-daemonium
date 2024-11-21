@@ -30,6 +30,9 @@ class SigaaClient:
     def __init__(self):
         self.session.headers.update(self.headers)
 
+    def __del__(self):
+        self.session.close()
+
     def login(self, user: str, password: str):
         paylod = 'width=1024&height=768&urlRedirect=&acao=&user.login={}&user.senha={}&entrar=Entrar'.format(
             user, password
