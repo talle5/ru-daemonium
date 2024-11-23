@@ -16,6 +16,12 @@ execute:
 python ru.py --modo [week,next_day] --user [USUARIO] --password [SENHA]
 ```
 
+# Automação completa com GitHubActions
+1. fork esse repositório 
+2. adicione seus segredos ao repositorio: <br/>SIGAA_USER = seu usuário <br/>SIGAA_SENHA = sua senha
+3. modifique a data e horário pra a execução do script em .github/workflows/main.yml
+4. e pronto!
+
 
 # Lista de tarefas:
 
